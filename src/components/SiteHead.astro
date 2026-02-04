@@ -74,17 +74,19 @@ const menu = [
 
       <li class="sb__item">
         <a
-          href="https://www.linkedin.com/in/wodniack/"
+          href="https://x.com"
           target="_blank"
           rel="noopener"
         >
-          <span
-            class="sb__icon sb__icon--linkedin"
-            style="--path: path('M1.13025 14.9839H3.93671V4.6H1.13025V14.9839ZM2.53348 0.0161285C1.598 0.0161285 0.849609 0.764516 0.849609 1.7C0.849609 2.63548 1.598 3.38387 2.53348 3.38387C3.46896 3.38387 4.21735 2.63548 4.21735 1.7C4.21735 0.764516 3.46896 0.0161285 2.53348 0.0161285ZM8.70767 6.19032V4.6H5.90122V14.9839H8.70767V9.65161C8.70767 6.65806 12.5432 6.47097 12.5432 9.65161V14.9839H15.3496V8.62258C15.3496 3.57097 10.0174 3.75806 8.70767 6.19032Z');"
-          >
-          </span>
+          <img 
+            src="/images/x-logo.png" 
+            alt="" 
+            class="sb__icon sb__icon--x"
+            width="16" 
+            height="16"
+          />
 
-          <span class="u-sr-only">Follow me on LinkedIn</span>
+          <span class="u-sr-only">Follow me on X</span>
         </a>
       </li>
     </ul><!-- .sb-socials -->
@@ -708,9 +710,10 @@ const menu = [
           height: 19px;
         }
 
-        &--linkedin {
+        &--x {
           width: 16px;
-          height: 15px;
+          height: 16px;
+          filter: var(--icon-filter, invert(0));
         }
       }
 
