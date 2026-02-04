@@ -165,14 +165,18 @@ const key = Math.random().toString(36).slice(2, 6) + '-' + index + '/' + total
     .a__image {
       display: block;
 
-      width: auto;
+      width: 100%;
+      min-width: 300px;
       max-width: 50vw;
       height: auto;
+      min-height: 200px;
       max-height: 50vh;
-      object-fit: cover;
+      object-fit: contain;
 
       @include mq(phone) {
+        min-width: 250px;
         max-width: 80vw;
+        min-height: 150px;
         max-height: 80vh;
       }
     }

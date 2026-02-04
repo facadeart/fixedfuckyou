@@ -2,20 +2,21 @@
 import AWork from './AWork.astro'
 
 // Import all images from the works folder
-const imageModules = import.meta.glob<{ default: string }>('/src/assets/works/*.{png,jpg,jpeg,gif,webp}', { eager: true })
+const imageModules = import.meta.glob<{ default: ImageMetadata }>('/src/assets/works/*.{png,jpg,jpeg,gif,webp}', { eager: true })
 const images = Object.entries(imageModules)
 
 let projects = []
 
 // Load all images from the works folder
 images.forEach(([path, image], index) => {
-  const src = image.default
+  // Astro image imports return an object with src property
+  const imageSrc = typeof image.default === 'string' ? image.default : image.default.src
   const filename = path.split('/').pop()?.replace(/\.[^/.]+$/, '') || `Image ${index + 1}`
   
   projects.push({
     caption: filename,
     site: '#',
-    src,
+    src: imageSrc,
     type: 'image'
   })
 })
