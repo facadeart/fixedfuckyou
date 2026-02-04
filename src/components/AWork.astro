@@ -1,23 +1,34 @@
 ---
-const { caption, cssClass, index, site, src, total } = Astro.props
+const { caption, cssClass, index, site, src, total, type = 'image' } = Astro.props
 
 // A random string with the syntax '[a-z][0-9]{3}-index-total'
 const key = Math.random().toString(36).slice(2, 6) + '-' + index + '/' + total
 ---
 
-<a-work class={cssClass}>
+<a-work class={cssClass} data-type={type}>
   <div class="a__inner">
     <a href={site} target="_blank">
-      <video
-        data-src={src}
-        class="a__video js-video"
-        loop
-        muted
-        playsinline
-        width="1082"
-        height="636"
-      >
-      </video>
+      {type === 'image' ? (
+        <img
+          src={src}
+          alt={caption}
+          class="a__image js-image"
+          loading="lazy"
+          width="1082"
+          height="636"
+        />
+      ) : (
+        <video
+          data-src={src}
+          class="a__video js-video"
+          loop
+          muted
+          playsinline
+          width="1082"
+          height="636"
+        >
+        </video>
+      )}
 
       <div class="a__caption">
         <div class="a__caption__text">
@@ -37,9 +48,11 @@ const key = Math.random().toString(36).slice(2, 6) + '-' + index + '/' + total
     static observedAttributes = ['progress']
 
     link: HTMLAnchorElement
-    video: HTMLVideoElement
+    video: HTMLVideoElement | null
+    image: HTMLImageElement | null
+    type: string
 
-    isPlaying: boolean
+    isInView: boolean
 
     /**
      * Init
@@ -47,10 +60,12 @@ const key = Math.random().toString(36).slice(2, 6) + '-' + index + '/' + total
     connectedCallback() {
       // Elements
       this.video = this.querySelector('.js-video')
+      this.image = this.querySelector('.js-image')
       this.link = this.querySelector('a')
+      this.type = this.dataset.type || 'image'
 
       // Properties
-      this.isPlaying = false
+      this.isInView = false
 
       // Events
       this.link.addEventListener('click', this.onClick.bind(this))
@@ -64,11 +79,11 @@ const key = Math.random().toString(36).slice(2, 6) + '-' + index + '/' + total
         this.style.setProperty('--progress', newValue)
 
         if (newValue === '1' || newValue === '-1') {
-          if (this.isPlaying) {
+          if (this.isInView) {
             this.outView()
           }
         } else {
-          if (!this.isPlaying) {
+          if (!this.isInView) {
             this.inView()
           }
         }
@@ -79,8 +94,10 @@ const key = Math.random().toString(36).slice(2, 6) + '-' + index + '/' + total
      * Gets in view
      */
     inView() {
-      this.video.play()
-      this.isPlaying = true
+      if (this.type === 'video' && this.video) {
+        this.video.play()
+      }
+      this.isInView = true
 
       this.classList.add('is-inview')
     }
@@ -89,8 +106,10 @@ const key = Math.random().toString(36).slice(2, 6) + '-' + index + '/' + total
      * Gets out view
      */
     outView() {
-      this.video.pause()
-      this.isPlaying = false
+      if (this.type === 'video' && this.video) {
+        this.video.pause()
+      }
+      this.isInView = false
 
       this.classList.remove('is-inview')
     }
@@ -142,13 +161,15 @@ const key = Math.random().toString(36).slice(2, 6) + '-' + index + '/' + total
       padding: 0;
     }
 
-    .a__video {
+    .a__video,
+    .a__image {
       display: block;
 
       width: auto;
       max-width: 50vw;
       height: auto;
       max-height: 50vh;
+      object-fit: cover;
 
       @include mq(phone) {
         max-width: 80vw;

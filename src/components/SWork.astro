@@ -1,103 +1,24 @@
 ---
 import AWork from './AWork.astro'
-import dummyVideo from '/src/assets/works/Dummy.mp4'
 
-const videoModules = import.meta.glob<{ default: string }>('/src/assets/works/*.mp4', { eager: true })
-const videos = Object.values(videoModules)
-
-// Yeah, this should probably be in a CMS or content file.
-// But it’s my site, and editing it in code is faster than setting up yet another headless something.
-// Sometimes "quick and dirty" wins. Don’t @ me.
-const info = {
-  Pen: {
-    title: 'CodePen',
-    site: 'https://codepen.io/wodniack',
-  },
-  Dummy1: {
-    title: 'Dummy Project 1',
-    site: 'https://wodniack.dev',
-  },
-  Dummy2: {
-    title: 'Dummy Project 2',
-    site: 'https://wodniack.dev',
-  },
-  Dummy3: {
-    title: 'Dummy Project 3',
-    site: 'https://wodniack.dev',
-  },
-  Dummy4: {
-    title: 'Dummy Project 4',
-    site: 'https://wodniack.dev',
-  },
-  Dummy5: {
-    title: 'Dummy Project 5',
-    site: 'https://wodniack.dev',
-  },
-  Dummy6: {
-    title: 'Dummy Project 6',
-    site: 'https://wodniack.dev',
-  },
-  Dummy7: {
-    title: 'Dummy Project 7',
-    site: 'https://wodniack.dev',
-  },
-  Dummy8: {
-    title: 'Dummy Project 8',
-    site: 'https://wodniack.dev',
-  },
-  Dummy9: {
-    title: 'Dummy Project 9',
-    site: 'https://wodniack.dev',
-  },
-  Dummy10: {
-    title: 'Dummy Project 10',
-    site: 'https://wodniack.dev',
-  }
-}
+// Import all images from the works folder
+const imageModules = import.meta.glob<{ default: string }>('/src/assets/works/*.{png,jpg,jpeg,gif,webp}', { eager: true })
+const images = Object.entries(imageModules)
 
 let projects = []
-let pens = []
 
-// I removed the video loops to keep the repo lightweight.
-// But this is where I normally fetch and assign the videos for each project in the portfolio.
-videos.forEach((video, index) => {
-  const src = video.default
-
-  const key = src.split('-')[0].split('/').pop()
-  const project = info[key]
-  if (!project) return
-  const caption = project.title
-  const site = project.site
-
-  if (key === 'Pen') {
-    pens.push({
-      caption,
-      site,
-      src,
-    })
-  } else {
-    projects.push({
-      caption,
-      site,
-      src,
-    })
-  }
+// Load all images from the works folder
+images.forEach(([path, image], index) => {
+  const src = image.default
+  const filename = path.split('/').pop()?.replace(/\.[^/.]+$/, '') || `Image ${index + 1}`
+  
+  projects.push({
+    caption: filename,
+    site: '#',
+    src,
+    type: 'image'
+  })
 })
-
-// Create dummy projects with 3 videos each
-for (let i = 1; i <= 14; i++) {
-  const key = `Dummy${i}`
-  const project = info[key]
-  if (!project) continue
-
-  for (let j = 0; j < 4; j++) {
-    projects.push({
-      caption: `${project.title} - Video ${j + 1}`,
-      site: project.site,
-      src: dummyVideo
-    })
-  }
-}
 
 function shuffle(array) {
   let currentIndex = array.length
@@ -114,19 +35,8 @@ function shuffle(array) {
 
 shuffle(projects)
 
-// Add pens in between projects regularly
-let works = []
-let chunkSize = Math.floor(projects.length / pens.length)
-let i = 0
-let j = 0
-while (i < projects.length) {
-  works.push(projects[i])
-  if (j < pens.length && (i + 1) % chunkSize === 0) {
-    works.push(pens[j])
-    j++
-  }
-  i++
-}
+// Use projects directly as works
+let works = projects
 ---
 
 <section id="work" class="s-work" data-intersect>
@@ -191,6 +101,7 @@ while (i < projects.length) {
     ctx: CanvasRenderingContext2D
     title: HTMLElement
     videos: NodeListOf<HTMLVideoElement>
+    images: NodeListOf<HTMLImageElement>
 
     mask: {
       width: number
@@ -241,6 +152,7 @@ while (i < projects.length) {
       this.ctx = this.canvas.getContext('2d')
       this.title = this.container.querySelector('.js-title')
       this.videos = this.container.querySelectorAll('video')
+      this.images = this.container.querySelectorAll('img')
 
       // Properties
       this.mask = {
