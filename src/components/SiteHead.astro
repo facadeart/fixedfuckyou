@@ -89,6 +89,24 @@ const menu = [
           <span class="u-sr-only">Visit my Linktree</span>
         </a>
       </li>
+
+      <li class="sb__item">
+        <a
+          href="https://x.com"
+          target="_blank"
+          rel="noopener"
+        >
+          <img 
+            src="/images/x-logo.png" 
+            alt="" 
+            class="sb__icon sb__icon--x"
+            width="16" 
+            height="16"
+          />
+
+          <span class="u-sr-only">Follow me on X</span>
+        </a>
+      </li>
     </ul><!-- .sb-socials -->
 
     <button class="sb-contrast js-contrast" type="button">
@@ -713,6 +731,14 @@ const menu = [
         &--linktree {
           width: 16px;
           height: 20px;
+          background: none;
+          clip-path: none;
+          filter: invert(1);
+        }
+
+        &--x {
+          width: 16px;
+          height: 16px;
           background: none;
           clip-path: none;
           filter: invert(1);
