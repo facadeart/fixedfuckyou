@@ -6,11 +6,11 @@ const menu = [
   },
   {
     id: 'work',
-    text: 'Work',
+    text: 'WIN!',
   },
   {
     id: 'contact',
-    text: 'Contact',
+    text: 'APP',
   },
 ]
 ---
@@ -19,24 +19,14 @@ const menu = [
   <div class="site-head__container">
     <div class="sb-logo">
       <a href="/">
-        <svg
-          class="js-logo"
+        <img 
+          src="/images/logo.png" 
+          alt="K Logo" 
+          class="js-logo sb-logo__img"
           width="280"
           height="280"
-          viewBox="0 0 280 280"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M240.245 0v263.2h-19.894V0h-39.756v263.2h-19.861V0h-39.755v280H280V0h-39.755Z"
-            fill="#160000"
-          >
-          </path>
-          <path d="M0 0v280h39.755V16.8H59.65V280h39.756V0H0Z" fill="#160000">
-          </path>
-        </svg>
-
-        <span class="u-sr-only">Antoine Wodniack</span>
+          style="image-rendering: -webkit-optimize-contrast;"
+        />
       </a>
     </div><!-- .sb-logo -->
 
@@ -61,30 +51,38 @@ const menu = [
 
     <ul class="sb-socials">
       <li class="sb__item">
-        <a href="https://codepen.io/wodniack" target="_blank" rel="noopener">
-          <span
-            class="sb__icon sb__icon--codepen"
-            style="--path: path('M19.3184 6.01751L10.4517 0.105976C10.3477 0.0365379 10.2254 -0.000518799 10.1002 -0.000518799C9.97513 -0.000518799 9.85282 0.0365379 9.74874 0.105976L0.882076 6.01751C0.795245 6.07529 0.724029 6.15362 0.674752 6.24555C0.625475 6.33747 0.599663 6.44014 0.599609 6.54444V12.456C0.599609 12.6675 0.706009 12.8651 0.882076 12.9829L9.74874 18.8944C9.85269 18.9636 9.97476 19.0005 10.0996 19.0005C10.2245 19.0005 10.3465 18.9636 10.4505 18.8944L19.3171 12.9829C19.404 12.9251 19.4752 12.8468 19.5245 12.7549C19.5737 12.6629 19.5996 12.5603 19.5996 12.456V6.54444C19.5996 6.44014 19.5737 6.33747 19.5245 6.24555C19.4752 6.15362 19.404 6.07529 19.3171 6.01751H19.3184ZM10.1009 11.6934L6.80881 9.49958L10.1009 7.30571L13.3929 9.49958L10.1009 11.6934ZM10.7342 6.20498V1.81598L17.8263 6.54318L14.5342 8.73704L10.7342 6.20371V6.20498ZM9.46754 6.20498L5.66754 8.73831L2.37548 6.54444L9.46754 1.81724V6.20498ZM4.52628 9.49958L1.86754 11.2716V7.72751L4.52628 9.49958ZM5.66754 10.2608L9.46754 12.7942V17.1832L2.37548 12.456L5.66754 10.2608ZM10.7342 12.7942L14.5342 10.2608L17.8263 12.4547L10.7342 17.1819V12.7942ZM15.6755 9.49958L18.3342 7.72751V11.2716L15.6755 9.49958Z');"
-          >
-          </span>
+        <a
+          href="https://linktr.ee"
+          target="_blank"
+          rel="noopener"
+        >
+          <img 
+            src="/images/linktree-logo.png" 
+            alt="" 
+            class="sb__icon sb__icon--linktree"
+            width="16" 
+            height="16"
+          />
 
-          <span class="u-sr-only">Follow me on CodePen</span>
+          <span class="u-sr-only">Visit my Linktree</span>
         </a>
       </li>
 
       <li class="sb__item">
         <a
-          href="https://www.linkedin.com/in/wodniack/"
+          href="https://x.com/khanlabsinc"
           target="_blank"
           rel="noopener"
         >
-          <span
-            class="sb__icon sb__icon--linkedin"
-            style="--path: path('M1.13025 14.9839H3.93671V4.6H1.13025V14.9839ZM2.53348 0.0161285C1.598 0.0161285 0.849609 0.764516 0.849609 1.7C0.849609 2.63548 1.598 3.38387 2.53348 3.38387C3.46896 3.38387 4.21735 2.63548 4.21735 1.7C4.21735 0.764516 3.46896 0.0161285 2.53348 0.0161285ZM8.70767 6.19032V4.6H5.90122V14.9839H8.70767V9.65161C8.70767 6.65806 12.5432 6.47097 12.5432 9.65161V14.9839H15.3496V8.62258C15.3496 3.57097 10.0174 3.75806 8.70767 6.19032Z');"
-          >
-          </span>
+          <img 
+            src="/images/x-logo.png" 
+            alt="" 
+            class="sb__icon sb__icon--x"
+            width="16" 
+            height="16"
+          />
 
-          <span class="u-sr-only">Follow me on LinkedIn</span>
+          <span class="u-sr-only">Follow me on X</span>
         </a>
       </li>
     </ul><!-- .sb-socials -->
@@ -503,7 +501,8 @@ const menu = [
         height: 4rem;
       }
 
-      svg {
+      svg,
+      &__img {
         width: 3rem;
         height: 3rem;
 
@@ -708,9 +707,20 @@ const menu = [
           height: 19px;
         }
 
-        &--linkedin {
+        &--linktree {
           width: 16px;
-          height: 15px;
+          height: 20px;
+          background: none;
+          clip-path: none;
+          transition: filter 0.3s ease;
+        }
+
+        &--x {
+          width: 16px;
+          height: 16px;
+          background: none;
+          clip-path: none;
+          transition: filter 0.3s ease;
         }
       }
 
@@ -749,6 +759,11 @@ const menu = [
           .sb__icon {
             &:before {
               scale: 1 1;
+            }
+
+            &--linktree,
+            &--x {
+              filter: invert(1);
             }
           }
         }
@@ -953,6 +968,38 @@ const menu = [
           top / 100% 12.5% repeat;
 
         content: '';
+      }
+
+      &:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        background: color(secondary);
+        scale: 0 1;
+        transform-origin: right center;
+        transition: scale 0.3s ease;
+
+        content: '';
+      }
+
+      img {
+        position: relative;
+        z-index: 1;
+        transition: filter 0.3s ease;
+      }
+
+      &:hover {
+        &:after {
+          scale: 1 1;
+          transform-origin: left center;
+        }
+
+        img {
+          filter: invert(1);
+        }
       }
     }
   }

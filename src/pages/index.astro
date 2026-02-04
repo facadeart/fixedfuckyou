@@ -121,14 +121,13 @@ import '../styles/global.scss'
       style="opacity: 1; position: fixed; top: 0; left: 0; z-index: 50; width: 100%; height: 100%; background: #F40C3F;"
     >
       <div class="sb-logo js-logo">
-        <div class="sb__path sb__path--v sb__path--v-1 js-logo-line-v"></div>
-        <div class="sb__path sb__path--h sb__path--h-1 js-logo-line-h"></div>
-        <div class="sb__path sb__path--v sb__path--v-2 js-logo-line-v"></div>
-        <div class="sb__path sb__path--v sb__path--v-3 js-logo-line-v"></div>
-        <div class="sb__path sb__path--h sb__path--h-2 js-logo-line-h"></div>
-        <div class="sb__path sb__path--v sb__path--v-4 js-logo-line-v"></div>
-        <div class="sb__path sb__path--h sb__path--h-3 js-logo-line-h"></div>
-        <div class="sb__path sb__path--v sb__path--v-5 js-logo-line-v"></div>
+        <img 
+          src="/images/logo.png" 
+          alt="Logo" 
+          class="sb-logo__img"
+          width="280"
+          height="280"
+        />
       </div><!-- .sb-logo -->
 
       <div class="site-intro__border site-intro__border--top js-border-top">
@@ -393,8 +392,7 @@ import '../styles/global.scss'
         const wrapper: HTMLElement = document.querySelector('.js-site-wrapper')
         const intro: HTMLElement = document.querySelector('.js-intro')
         const mount: HTMLElement = document.querySelector('.js-mount')
-        const logoLinesV: NodeList = intro.querySelectorAll('.js-logo-line-v')
-        const logoLinesH: NodeList = intro.querySelectorAll('.js-logo-line-h')
+        const logo: HTMLElement = intro.querySelector('.js-logo')
         const borderTop: HTMLElement = intro.querySelector('.js-border-top')
         const borderLeft: HTMLElement = intro.querySelector('.js-border-left')
         const borderRight: HTMLElement = intro.querySelector('.js-border-right')
@@ -410,66 +408,34 @@ import '../styles/global.scss'
           background: 'transparent',
         })
 
+        // Logo fade in and scale up
         tl.fromTo(
-          logoLinesV,
+          logo,
           {
-            scaleY: 0,
+            opacity: 0,
+            scale: 0,
+            rotation: -180,
           },
           {
-            scaleY: 1,
-            duration: 1,
-            ease: 'power4.inOut',
-            stagger: 0.15,
+            opacity: 1,
+            scale: 1,
+            rotation: 0,
+            duration: 1.5,
+            ease: 'power4.out',
           },
           0
         )
 
-        tl.fromTo(
-          logoLinesH,
+        // Logo fade out and scale up more
+        tl.to(
+          logo,
           {
-            scaleX: 0,
-          },
-          {
-            scaleX: 1,
-            duration: 0.4,
-            ease: 'power4.inOut',
-            stagger: 0,
-          },
-          1
-        )
-
-        tl.set(logoLinesV, {
-          transformOrigin: '50% 0',
-        })
-
-        tl.fromTo(
-          logoLinesV,
-          {
-            scaleY: 1,
-          },
-          {
-            scaleY: 0,
+            opacity: 0,
+            scale: 1.5,
             duration: 1,
             ease: 'power4.in',
-            immediateRender: false,
-            stagger: 0.1,
           },
           2
-        )
-
-        tl.fromTo(
-          logoLinesH,
-          {
-            scaleY: 1,
-          },
-          {
-            scaleY: 0,
-            duration: 0.5,
-            ease: 'power4.in',
-            immediateRender: false,
-            stagger: 0.1,
-          },
-          2.1
         )
 
         tl.from(
@@ -581,14 +547,21 @@ import '../styles/global.scss'
         top: 50%;
         left: 50%;
 
-        width: 3rem;
-        height: 3rem;
+        width: 6rem;
+        height: auto;
 
-        transform: translate3d(-50%, -50%, 0);
+        transform: translate3d(-50%, -50%, 0) scale(0);
+        opacity: 0;
 
         @include mq(phone) {
-          width: 1.875rem;
-          height: 1.875rem;
+          width: 4rem;
+          height: auto;
+        }
+
+        &__img {
+          width: 100%;
+          height: auto;
+          display: block;
         }
 
         .sb__path {
