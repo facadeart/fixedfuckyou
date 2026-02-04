@@ -2,6 +2,7 @@
  * Colors helpers
  */
 @use 'sass:map';
+@use 'sass:meta';
 @use "../variables-scss/colors" as *;
 
 /* Get a color value */
@@ -9,7 +10,7 @@
   @if $alpha != 1 {
     $value: map.get($theme-colors, $key);
     $alias: map.get($theme-colors, $value);
-    $color: if($alias, $alias, $value);
+    $color: meta.if($alias, $alias, $value);
 
     @return rgba($color, $alpha);
   } @else {
