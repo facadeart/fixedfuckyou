@@ -412,13 +412,13 @@ import '../styles/global.scss'
         tl.fromTo(
           logo,
           {
-            scale: 0,
             opacity: 0,
+            scale: 0,
             rotation: -180,
           },
           {
-            scale: 1,
             opacity: 1,
+            scale: 1,
             rotation: 0,
             duration: 1.5,
             ease: 'power4.out',
@@ -430,8 +430,8 @@ import '../styles/global.scss'
         tl.to(
           logo,
           {
-            scale: 1.5,
             opacity: 0,
+            scale: 1.5,
             duration: 1,
             ease: 'power4.in',
           },
@@ -550,7 +550,8 @@ import '../styles/global.scss'
         width: 6rem;
         height: auto;
 
-        transform: translate3d(-50%, -50%, 0);
+        transform: translate3d(-50%, -50%, 0) scale(0);
+        opacity: 0;
 
         @include mq(phone) {
           width: 4rem;
