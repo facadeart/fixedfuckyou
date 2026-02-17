@@ -480,6 +480,7 @@ const menu = [
 
       width: 100%;
       height: 6rem;
+      overflow: hidden;
 
       @include mq(phone) {
         height: 4rem;
@@ -487,9 +488,12 @@ const menu = [
     }
 
     .sb-logo {
-      padding: 1.5rem;
+      padding: 1rem;
       width: 6rem;
       height: 6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       border-right: 1px solid color(secondary);
 
@@ -498,19 +502,19 @@ const menu = [
       }
 
       @include mq(phone) {
-        padding: 1rem;
-        width: 4rem;
-        height: 4rem;
+        padding: 0.75rem;
+        width: 4.5rem;
+        height: 4.5rem;
       }
 
       svg,
       &__img {
-        width: 3rem;
-        height: 3rem;
+        width: 4.5rem;
+        height: 4.5rem;
 
         @include mq(phone) {
-          width: 1.875rem;
-          height: 1.875rem;
+          width: 2.75rem;
+          height: 2.75rem;
         }
       }
     }
